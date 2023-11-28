@@ -3,7 +3,16 @@ from itertools import product
 
 def checkKnight(x,y,n):
     global sudoku
-    moves = list(product([x - 1, x + 1], [y - 2, y + 2])) + list(product([x - 2, x + 2], [y - 1, y + 1]))
+    moves = list(product([x-1, x+1], [y-2, y+2])) + list(product([x-2, x+2], [y-1, y+1]))
+    moves = [(x, y) for x, y in moves if x >= 0 and y >= 0 and x < 9 and y < 9]
+    for i in moves:
+        if sudoku[i[0]][i[1]] == n:
+            return True
+    return False
+
+def checkKings(x,y,n):
+    global sudoku
+    moves = list(product([x-1, x+1],[y-1, y+1]))
     moves = [(x, y) for x, y in moves if x >= 0 and y >= 0 and x < 9 and y < 9]
     for i in moves:
         if sudoku[i[0]][i[1]] == n:
@@ -28,6 +37,9 @@ def trial(x,y,n):
     if knightsmove == 1:
         if checkKnight(x,y,n):
             return False
+    if kingsmove == 1:
+        if checkKings(x,y,n):
+            return False
     return True
 
 def solve():
@@ -46,18 +58,15 @@ def solve():
 if __name__ == '__main__':
 
     knightsmove = 1 #Toggle for Knight's move constraint
-    sudoku = [[1,5,6,0,4,0,0,0,0],
+    kingsmove = 1 #Toggle for Knig's move constraint
+    sudoku = [[1,0,0,0,0,0,0,0,0],
               [0,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,6,0,0,4],
+              [0,0,0,0,0,0,0,0,0],
               [0,6,0,0,8,0,0,0,0],
               [0,0,0,4,0,0,0,0,0],
-              [7,0,0,0,0,0,0,0,1],
-              [0,0,0,0,0,0,2,0,0],
+              [0,0,0,0,0,0,0,0,0],
+              [0,0,0,0,0,0,0,0,0],
               [8,0,0,0,0,0,0,0,0],
               [0,0,0,0,0,0,0,0,9]]
 
     solve()
-
-
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
