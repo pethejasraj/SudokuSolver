@@ -1,5 +1,6 @@
 import numpy as np
 from itertools import product
+import time
 
 def checkKnight(x,y,n):
     global sudoku
@@ -34,12 +35,13 @@ def trial(x,y,n):
         for j in range(0,3):
             if sudoku[x1+i][y1+j] == n:
                 return False
-    if knightsmove == 1:
-        if checkKnight(x,y,n):
-            return False
     if kingsmove == 1:
         if checkKings(x,y,n):
             return False
+    if knightsmove == 1:
+        if checkKnight(x,y,n):
+            return False
+
     return True
 
 def solve():
@@ -57,16 +59,16 @@ def solve():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
 
-    knightsmove = 1 #Toggle for Knight's move constraint
+    knightsmove = 0 #Toggle for Knight's move constraint
     kingsmove = 1 #Toggle for Knig's move constraint
-    sudoku = [[1,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,0],
-              [0,6,0,0,8,0,0,0,0],
-              [0,0,0,4,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,0],
-              [8,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,9]]
-
+    counter = 0
+    sudoku = [[3,0,7,0,5,0,0,0,6],
+              [0,0,4,0,1,0,0,3,0],
+              [0,0,0,0,0,0,2,0,0],
+              [0,4,0,0,0,0,0,0,0],
+              [0,0,0,7,0,0,0,4,0],
+              [0,0,0,0,0,2,0,5,9],
+              [0,5,0,0,0,8,0,0,0],
+              [8,9,0,0,0,0,0,0,3],
+              [0,0,1,0,6,0,5,2,0]]
     solve()
